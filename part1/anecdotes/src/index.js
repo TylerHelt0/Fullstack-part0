@@ -2,24 +2,35 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
+  const randoNum = ()=>{return Math.floor(Math.random()*6)}
+  const [selected, setSelected] = useState(randoNum)
+  const [votes,setVotes] = useState([0,0,0,0,0,0])
+  const anecKey = votes.indexOf(Math.max(...votes))
+  console.log('------------------------------\n',props)
+  console.log('Quote votes: ',votes,'\n------------------------------')
 
   return (
     <div>
         {props.anecdotes[selected]}
+        <p>Has {votes[selected]} votes</p>
         <div>
             <button onClick={getQuote}>Next Annecdote</button>
-            <button onClick={setVote(selected)}>Vote</button>
+            <button onClick={castVote(selected)}>Vote</button>
         </div>
+        <h3>Winning Quote</h3>
+        <p>{props.anecdotes[anecKey]}</p>
     </div>
   )
     function getQuote(){
-        setSelected(Math.floor(Math.random()*6))
+        setSelected(randoNum)
     }
-    function setVote(vote){
-        return ()=>{
- 
-        }
+    
+    function castVote(selected){
+      return ()=>{
+        let newVotes = [...votes]
+        newVotes[selected]++
+        setVotes(newVotes)
+      }
     }
 }
 
