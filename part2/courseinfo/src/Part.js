@@ -3,9 +3,9 @@ import React from 'react';
 const Part = (prop) =>{
   console.log(prop)
   return (
-    <p>
+    <li >
       {prop.part} {prop.exer}
-    </p>
+    </li>
   )
 }
 

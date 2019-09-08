@@ -1,11 +1,14 @@
 import React from 'react';
 
 const Total = (prop) =>{
+  const num = prop.parts.reduce((accu,value)=>accu + value.exercises,0)
+  console.log(num)
   return (
     <>
-    <p>Number of exercises {prop.parts[1].exercises + prop.parts[2].exercises + prop.parts[0].exercises}</p>
+    <p>Number of exercises {num}</p>
     </>
   )
+
 }
 
 export default Total;

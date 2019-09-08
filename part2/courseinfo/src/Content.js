@@ -2,13 +2,15 @@ import React from 'react';
 import Part from './Part'
 
 const Content = (prop) => {
+  const listParts = prop.parts.map((x,i)=><Part key={i+x.exercises}part={x.name}exer={x.exercises}/>)
   return (
     <>
-    <Part part={prop.parts[0].name}exer={prop.parts[0].exercises}/>
-    <Part part={prop.parts[1].name}exer={prop.parts[1].exercises}/>
-    <Part part={prop.parts[2].name}exer={prop.parts[2].exercises}/>
+   { listParts}
     </>
   )
 }
 
 export default Content;
+
+    
+    
