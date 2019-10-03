@@ -1,23 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './App.css'
+import axios from 'axios'
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Phonebook from './components/Phonebook'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
-      {name: 'Arto Hellas',number:'251-243-7445'},
-      {name:'Joe Rogan',number:'727-233-9034'},
-      {name: 'Ada Lovelace', number: '39-44-5323523'},
-      {name: 'Dan Abramov', number: '12-43-234345'}
-    ]) 
+  const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-  const [ filterList, setList ] = useState(persons.map(a=>a))
+  const [ filterList, setList ] = useState([])
   const [ filter, setFilter ] = useState('')
 
+  useEffect(()=>{
+    console.log('effect start');
+    axios
+    .get('http://127.0.0.1:3001/persons')
+    .then(response=>{
+      console.log("promise fulfilled");
+      setPersons(response.data)
+      setList(response.data)
+    })
+  },[])
+  console.log('render',persons.length,'persons');
+
   const updateInput = (state)=>(event)=>state(event.target.value)
-  
+
   const submitForm = (event)=>{
     event.preventDefault();
     if(persons.every(dat=>dat.name.toUpperCase()!==newName.toUpperCase())===false){
@@ -32,8 +40,8 @@ const App = () => {
     }
     return console.log('Not submitting, form blank.')
   }
-  
-  function filterFunc(e){
+
+  const filterFunc = (e)=>{
     let result = []
     const checkDaList = ()=>{
       persons.forEach((dat,i,arr)=>{
@@ -63,7 +71,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} filterFunc={filterFunc}/>
       <h2>Add New Entry</h2>
-      <Form submitForm={submitForm} newName={newName} setNewName={setNewName} setNewNumber={setNewNumber} updateInput={updateInput}/>  
+      <Form submitForm={submitForm} newName={newName} setNewName={setNewName} setNewNumber={setNewNumber} updateInput={updateInput}/>
       <Phonebook filterList={filterList}/>
     </div>
   )
