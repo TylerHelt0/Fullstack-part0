@@ -37,6 +37,8 @@ const App = ()=>{
       .catch((err)=>{
         console.log('No input')
       })
+    } else if (state.query.length === 0){
+      setState((state)=>{return {...state,list:[]}})
     }
   },[state.query])
 
@@ -56,10 +58,12 @@ const App = ()=>{
       .then((res)=>{
         console.log(`Weather data for ${state.list[0].name}`,res);
         if (res.data.main && res.data.wind.speed){
-          setState({...state,
-            weather:{
-              temp:Math.round(res.data.main.temp),
-              wind:Math.round(res.data.wind.speed) + ' MPH, Direction '+ degToCompass(res.data.wind.deg)
+          setState((state)=>{
+            return {...state,
+              weather:{
+                temp:Math.round(res.data.main.temp),
+                wind:Math.round(res.data.wind.speed) + ' MPH, Direction '+ degToCompass(res.data.wind.deg)
+              }
             }
           })
         }

@@ -22,8 +22,7 @@ const Countries = ({state,setState,handleShow})=>{
     return(
       <></>
     )
-  } else if(state.list.length >10){
-
+  } else if(state.list.length >10||state.list.length > 0){
     return(
       <p>Too many matches, specify another filter</p>
     )
