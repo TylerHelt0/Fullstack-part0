@@ -4,11 +4,16 @@ import Weather from './Weather'
 const Countries = ({state,setState,handleShow})=>{
 
   if(state.list.length === 1){
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    const population = numberWithCommas(state.list[0].population)
     return(
       <div>
       <h2>{state.list[0].name}</h2>
       <p>Captial: {state.list[0].capital}</p>
-      <p>Population: {state.list[0].population}</p>
+      <p>Population: {population}</p>
 
       <h3>Languages</h3>
       <ul>
