@@ -5,8 +5,8 @@ const Filter = ({state,setState})=>{
   //Function to check the state.persons list for filter query
   const filterFunc = (e)=>{
     let result = []
-    
-    //if state.filterInput is included in any state.persons value, add to results
+
+    //if state.filterInput is included in any state.persons.name value, add to results
     const checkDaList = ()=>{
       state.persons.forEach((dat)=>{
         if(dat.name.toUpperCase().includes(e.target.value.toUpperCase())){

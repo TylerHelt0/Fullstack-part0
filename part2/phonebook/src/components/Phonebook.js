@@ -7,8 +7,9 @@ const Phonebook = ({state,setState}) =>{
     return ()=>{
       if(window.confirm(`Do you really want to delete ${a.name}?`)){
         axios.delete(`http://127.0.0.1:3001/persons/${a.id}`)
-        .then(
-          axios.get('http://localhost:3001/persons')
+        .then(()=>{
+          console.log(`${a.name} deleted`)
+          axios.get('http://127.0.0.1:3001/persons')
           .then(response=>{
             setState(state=>({
               ...state,
@@ -17,8 +18,8 @@ const Phonebook = ({state,setState}) =>{
             }))
             console.log('New data fetched from server',response.data);
           })
-        )
-        console.log(`${a.name} deleted`);
+        })
+
       }
     }
   }

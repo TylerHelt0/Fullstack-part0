@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import './App.css'
+import Alert from './components/Alert'
 import Filter from './components/Filter'
 import Form from './components/Form'
 import Phonebook from './components/Phonebook'
@@ -13,6 +14,7 @@ const App = () => {
     filterInput:'',
     newName:'',
     newNumber:'',
+    message:''
   })
 
   //Initial load of database
@@ -33,6 +35,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Alert state={state}/>
       <Filter state={state} setState={setState}/>
       <h2>Add New Entry</h2>
       <Form state={state} setState={setState}/>

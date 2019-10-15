@@ -33,3 +33,13 @@ ul{
 .hide {
   display: none
 }
+
+.sucMsg {
+  border: 0.25rem solid green;
+  border-radius: 0.5rem;
+}
+
+.errMsg {
+  border: 0.25rem solid red;
+  border-radius: 0.5rem;
+}
